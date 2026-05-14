@@ -546,10 +546,16 @@
       padding: 100px 24px;
       color: var(--cream);
     }
+    @media (max-width: 767px) {
+      #proceso { padding: 60px 20px; }
+    }
     .proceso-inner { max-width: var(--max-w); margin: 0 auto; }
     .proceso-header {
       max-width: 600px;
       margin-bottom: 72px;
+    }
+    @media (max-width: 767px) {
+      .proceso-header { margin-bottom: 36px; }
     }
     .proceso-header h2 {
       font-family: var(--font-display);
@@ -565,41 +571,53 @@
     }
     .proceso-steps {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
     }
+    .pstep:last-child { grid-column: span 2; }
     @media (min-width: 768px) {
-      .proceso-steps { grid-template-columns: repeat(5, 1fr); }
+      .proceso-steps { grid-template-columns: repeat(5, 1fr); gap: 0; }
+      .pstep:last-child { grid-column: span 1; }
     }
     .pstep {
-      padding: 32px 24px 32px 0;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.02);
     }
     @media (min-width: 768px) {
-      .pstep { padding: 0 32px 0 0; border-top: none; border-right: 1px solid rgba(255,255,255,0.1); }
+      .pstep { padding: 0 32px 0 0; border: none; border-right: 1px solid rgba(255,255,255,0.1); background: none; }
       .pstep:last-child { border-right: none; padding-right: 0; }
     }
     .pstep-num {
       font-family: var(--font-display);
-      font-size: 3rem;
+      font-size: 2rem;
       font-weight: 300;
       color: var(--gold);
       opacity: 0.5;
       line-height: 1;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
+    }
+    @media (min-width: 768px) {
+      .pstep-num { font-size: 3rem; margin-bottom: 20px; }
     }
     .pstep-title {
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--cream);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+    }
+    @media (min-width: 768px) {
+      .pstep-title { font-size: 0.8rem; letter-spacing: 0.12em; margin-bottom: 10px; }
     }
     .pstep-body {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       color: rgba(255,255,255,0.45);
-      line-height: 1.75;
+      line-height: 1.65;
+    }
+    @media (min-width: 768px) {
+      .pstep-body { font-size: 0.82rem; line-height: 1.75; }
     }
 
     /* ══════════════════════════════════════
@@ -638,8 +656,51 @@
       grid-template-columns: 1fr;
       gap: 2px;
     }
+    @media (max-width: 767px) {
+      .planes-grid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 10px;
+        padding: 4px 4px 20px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .planes-grid::-webkit-scrollbar { display: none; }
+      .planes-grid .plan-card {
+        flex: 0 0 82vw;
+        max-width: 320px;
+        scroll-snap-align: start;
+      }
+      .planes-swipe-hint {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.3);
+      }
+      .planes-swipe-hint svg {
+        animation: swipeHint 1.8s ease-in-out infinite;
+      }
+      @keyframes swipeHint {
+        0%, 100% { transform: translateX(0); opacity: 0.4; }
+        50% { transform: translateX(6px); opacity: 1; }
+      }
+      @keyframes btnPulse {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201,169,110,0); }
+        50%       { transform: scale(1.025); box-shadow: 0 0 0 6px rgba(201,169,110,0.15); }
+      }
+      .plan-btn-mobile {
+        animation: btnPulse 2.4s ease-in-out infinite;
+      }
+    }
     @media (min-width: 768px) {
       .planes-grid { grid-template-columns: repeat(3, 1fr); }
+      .planes-swipe-hint { display: none; }
     }
     .plan-card {
       padding: 40px 32px;
@@ -1169,21 +1230,26 @@
       .hero-title { font-size: clamp(2.6rem, 12vw, 4rem); letter-spacing: -1px; }
       .hero-content { padding: 0 20px 52px; }
       .btn-wa { padding: 14px 22px; font-size: 0.72rem; }
-      .planes-grid { grid-template-columns: 1fr; }
       .plan-card { padding: 32px 24px; }
       .testi-card { grid-template-columns: 80px 1fr; gap: 16px; }
       .testi-img { width: 80px; }
       .cta-final-inner h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
-      .port-grid { grid-template-columns: 1fr; }
-      .port-cell.wide { grid-column: span 1; aspect-ratio: 4/3; }
-      .detail-grid { grid-template-columns: repeat(2, 1fr); }
-      .proceso-steps { grid-template-columns: 1fr; }
+      /* port-grid: SIEMPRE 2 columnas cuadradas en mobile */
+      .port-grid { grid-template-columns: repeat(2, 1fr); gap: 3px; }
+      .port-cell { aspect-ratio: 1/1; }
+      .port-cell.wide { grid-column: span 2; aspect-ratio: 16/7; }
+      .port-label-cell { aspect-ratio: 1/1; padding: 16px 14px; }
+      .port-label-cell .num { font-size: 2.2rem; }
+      .port-label-cell .txt { font-size: 0.6rem; letter-spacing: 0.18em; margin-top: 5px; }
+      .detail-grid { grid-template-columns: repeat(3, 1fr); }
       .about-inner { grid-template-columns: 1fr; }
       .stats-inner { flex-direction: column; }
     }
     @media (min-width: 480px) and (max-width: 767px) {
-      .port-grid { grid-template-columns: repeat(2, 1fr); }
-      .port-cell.wide { grid-column: span 2; }
+      .port-grid { grid-template-columns: repeat(2, 1fr); gap: 3px; }
+      .port-cell { aspect-ratio: 1/1; }
+      .port-cell.wide { grid-column: span 2; aspect-ratio: 16/7; }
+      .port-label-cell { aspect-ratio: 1/1; padding: 16px 14px; }
       .detail-grid { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
@@ -1400,6 +1466,10 @@
       </div>
       <p>Todas las coberturas incluyen edición profesional, galería digital en alta resolución y adelanto al día siguiente.</p>
     </div>
+    <div class="planes-swipe-hint">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      deslizá para ver los planes
+    </div>
     <div class="planes-grid">
       <!-- Plan 1 -->
       <div class="plan-card reveal">
@@ -1414,8 +1484,8 @@
           <li>Cobertura de 6 Hs.</li>
           <li>Edición profesional de luz y color.</li>
         </ul>
-        <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Boda%20%C3%8Dntima%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="border:1px solid var(--gold);background:transparent;color:var(--gold);display:flex;align-items:center;gap:10px;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.3s;">
-          DESDE $450.000
+        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Boda%20%C3%8Dntima%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="border:1px solid var(--gold);background:transparent;color:var(--gold);display:flex;align-items:center;gap:10px;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.3s;">
+          CONTRATAR DESDE $450.000
         </a>
       </div>
 
@@ -1434,8 +1504,8 @@
           <li>Preparativos · Ceremonia · Fiesta.</li>
           <li>Edición profesional de luz, contraste y color.</li>
         </ul>
-        <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Boda%20Completa%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="background:var(--gold);color:var(--dark);display:flex;align-items:center;gap:10px;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;border:none;">
-          DESDE $590.000
+        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Boda%20Completa%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="background:var(--gold);color:var(--dark);display:flex;align-items:center;gap:10px;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;border:none;">
+          CONTRATAR DESDE $590.000
         </a>
       </div>
 
@@ -1453,8 +1523,8 @@
           <li>Tomas aéreas con Drone.</li>
           <li>Ver Adicionales: Álbum impreso y más.</li>
         </ul>
-        <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Foto%20%2B%20Video%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="border:1px solid var(--gold);background:transparent;color:var(--gold);display:flex;align-items:center;gap:10px;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.3s;">
-          DESDE $1.290.000
+        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Foto%20%2B%20Video%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="border:1px solid var(--gold);background:transparent;color:var(--gold);display:flex;align-items:center;gap:10px;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.3s;">
+          CONTRATAR DESDE $1.290.000
         </a>
       </div>
     </div>
