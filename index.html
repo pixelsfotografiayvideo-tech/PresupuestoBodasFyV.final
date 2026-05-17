@@ -676,68 +676,75 @@
       .planes-swipe-hint {
         display: flex;
         align-items: center;
-        gap: 8px;
-        margin-bottom: 16px;
-        font-size: 0.68rem;
-        letter-spacing: 0.18em;
+        gap: 10px;
+        margin-bottom: 20px;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
-        color: rgba(255,255,255,0.3);
+        font-weight: 600;
+        color: var(--gold);
+        text-shadow: 0 0 12px rgba(201,169,110,0.6), 0 0 24px rgba(201,169,110,0.3);
       }
-      .planes-swipe-hint svg {
-        animation: swipeHint 1.8s ease-in-out infinite;
+      .planes-swipe-hint .swipe-text {
+        animation: textPulse 2.5s ease-in-out infinite;
       }
-      @keyframes swipeHint {
-        0%, 100% { transform: translateX(0); opacity: 0.4; }
-        50% { transform: translateX(6px); opacity: 1; }
+      @keyframes textPulse {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; text-shadow: 0 0 16px rgba(201,169,110,0.9); }
       }
 
-      /* ── FAB flecha deslizar ── */
-      .planes-grid-wrap {
+      /* Floating circle arrow — solo mobile */
+      .planes-grid {
         position: relative;
       }
       #swipe-fab {
         position: absolute;
-        right: -20px;
+        right: -18px;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 100;
-        width: 54px;
-        height: 54px;
+        z-index: 999;
+        width: 52px;
+        height: 52px;
         border-radius: 50%;
-        border: 2.5px solid var(--gold);
-        background: rgba(8,8,8,0.85);
-        backdrop-filter: blur(8px);
+        border: 2px solid var(--gold);
+        background: rgba(10,10,10,0.82);
+        backdrop-filter: blur(6px);
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        box-shadow: 0 0 18px rgba(201,169,110,0.45), 0 0 6px rgba(201,169,110,0.2);
-        animation: fabSlide 1.3s ease-in-out infinite, fabIn 0.5s ease forwards;
+        animation: fabBounce 1.4s ease-in-out infinite, fabFadeIn 0.5s ease forwards;
+        box-shadow: 0 0 14px rgba(201,169,110,0.35);
         opacity: 0;
         pointer-events: auto;
-        transition: opacity 0.3s, transform 0.3s;
       }
-      #swipe-fab svg {
-        width: 24px;
-        height: 24px;
-        stroke: var(--gold);
-        stroke-width: 2.5px;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        fill: none;
-      }
-      @keyframes fabIn {
+      @keyframes fabFadeIn {
         to { opacity: 1; }
       }
-      @keyframes fabSlide {
-        0%, 100% { transform: translateY(-50%) translateX(0);   box-shadow: 0 0 18px rgba(201,169,110,0.45); }
-        50%       { transform: translateY(-50%) translateX(-7px); box-shadow: 0 0 28px rgba(201,169,110,0.75); }
+      @keyframes fabBounce {
+        0%, 100% { transform: translateY(-50%) translateX(0); box-shadow: 0 0 8px rgba(201,169,110,0.3); }
+        50%       { transform: translateY(-50%) translateX(-6px); box-shadow: 0 0 20px rgba(201,169,110,0.6); }
       }
-      #swipe-fab.gone {
-        opacity: 0 !important;
-        transform: translateY(-50%) scale(0.5) !important;
+      #swipe-fab svg {
+        width: 26px;
+        height: 26px;
+        stroke: var(--gold);
+        stroke-width: 2;
+      }
+      #swipe-fab.hidden {
+        animation: fabFadeOut 0.3s ease forwards !important;
         pointer-events: none;
-        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+      @keyframes fabFadeOut {
+        to { opacity: 0; transform: translateY(-50%) scale(0.6); }
+      }
+
+      .planes-swipe-hint svg {
+        animation: swipeHint 1.8s ease-in-out infinite;
+      }
+      @keyframes swipeHint {
+        0%, 100% { transform: translateX(0); opacity: 0.5; }
+        50% { transform: translateX(5px); opacity: 1; }
       }
       @keyframes btnPulse {
         0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201,169,110,0); }
@@ -1516,15 +1523,16 @@
       <p>Todas las coberturas incluyen edición profesional, galería digital en alta resolución y adelanto al día siguiente.</p>
     </div>
     <div class="planes-swipe-hint">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      deslizá para ver los planes
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="swipe-text">deslizá para ver los planes</span>
     </div>
-    <div class="planes-grid-wrap">
-      <!-- FAB: solo mobile, desaparece al tocar o deslizar -->
+    <div class="planes-grid">
+      <!-- FAB swipe hint — solo mobile -->
       <div id="swipe-fab" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
       </div>
-      <div class="planes-grid">
       <!-- Plan 1 -->
       <div class="plan-card reveal">
         <div class="plan-num">Plan 01</div>
@@ -1581,8 +1589,7 @@
           CONTRATAR DESDE $1.290.000
         </a>
       </div>
-    </div><!-- /planes-grid -->
-    </div><!-- /planes-grid-wrap -->
+    </div>
     <p class="planes-footer">Todos los planes incluyen contrato + reserva de fecha. Cada evento es distinto, por eso podemos personalizar la propuesta según lo que necesiten.</p>
   </div>
 </section>
@@ -1925,49 +1932,72 @@
     });
   })();
 </script>
-
 <script>
-/* ── Swipe FAB — solo mobile ── */
-(function () {
-  if (window.innerWidth >= 768) return;          // solo celular
+  (function() {
+    var fab  = document.getElementById('swipe-fab');
+    var grid = document.querySelector('.planes-grid');
+    var section = document.getElementById('planes');
+    if (!fab || !grid || !section) return;
 
-  var fab  = document.getElementById('swipe-fab');
-  var grid = document.querySelector('.planes-grid');
-  if (!fab || !grid) return;
+    // Solo mobile
+    if (window.innerWidth >= 768) { fab.style.display = 'none'; return; }
 
-  function dismiss() {
-    fab.classList.add('gone');
-    setTimeout(function () { fab.style.display = 'none'; }, 280);
-    grid.removeEventListener('scroll', onScroll);
-  }
+    var dismissed = false;   // true mientras el carrusel ya fue usado en esta visita
 
-  function onScroll() {
-    // Al primer scroll del carrusel, desaparece
-    dismiss();
-  }
-
-  /* Tocar el ícono → desliza al plan siguiente y desaparece */
-  fab.addEventListener('touchstart', function (e) {
-    e.preventDefault();
-    var cardW = grid.querySelector('.plan-card');
-    if (cardW) {
-      grid.scrollBy({ left: cardW.offsetWidth + 10, behavior: 'smooth' });
+    function show() {
+      fab.style.display = 'flex';
+      fab.classList.remove('hidden');
+      // reinicia animación
+      fab.style.animation = 'none';
+      fab.offsetHeight; // reflow
+      fab.style.animation = '';
     }
-    dismiss();
-  }, { passive: false });
 
-  fab.addEventListener('click', function () {
-    var cardW = grid.querySelector('.plan-card');
-    if (cardW) {
-      grid.scrollBy({ left: cardW.offsetWidth + 10, behavior: 'smooth' });
+    function hide() {
+      fab.classList.add('hidden');
+      setTimeout(function() { fab.style.display = 'none'; }, 320);
     }
-    dismiss();
-  });
 
-  grid.addEventListener('scroll', onScroll, { passive: true, once: true });
-})();
+    // Al tocar o deslizar: ocultar Y marcar como "ya usó el carrusel"
+    function dismissForever() {
+      dismissed = true;
+      hide();
+    }
+
+    fab.addEventListener('touchstart', function() {
+      // toca el ícono: desliza al siguiente plan
+      var card = grid.querySelector('.plan-card');
+      if (card) grid.scrollBy({ left: card.offsetWidth + 10, behavior: 'smooth' });
+      dismissForever();
+    }, { passive: true });
+
+    fab.addEventListener('click', function() {
+      var card = grid.querySelector('.plan-card');
+      if (card) grid.scrollBy({ left: card.offsetWidth + 10, behavior: 'smooth' });
+      dismissForever();
+    });
+
+    grid.addEventListener('scroll', function() {
+      if (!dismissed) dismissForever();
+    }, { passive: true, once: true });
+
+    // IntersectionObserver: reaparece cada vez que la sección entra en viewport
+    // PERO no reaparece si el usuario ya usó el carrusel (dismissed = true)
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !dismissed) {
+          show();
+        } else if (!entry.isIntersecting) {
+          // al salir de vista: ocultar sin marcar dismissed
+          fab.style.display = 'none';
+          fab.classList.remove('hidden');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    io.observe(section);
+  })();
 </script>
-
 
 </body>
 </html>
