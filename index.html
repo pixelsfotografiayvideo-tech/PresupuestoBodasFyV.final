@@ -1703,6 +1703,15 @@
         <div class="faq-a"><div class="faq-a-inner">Estamos en Córdoba Capital, Argentina. Cubrimos bodas en la ciudad y zonas aledañas. Consultanos si tu evento es en el interior.</div></div>
       </div>
 
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+          <span class="faq-num">8</span>
+          <span class="faq-q-text">¿Cuáles son las formas de pago?</span>
+          <div class="faq-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Formas de Pago</strong><br><br>Para garantizar tu fecha, es necesario abonar una seña en el momento de la reserva. La fecha será oficialmente confirmada luego de ese pago.<br><br>El saldo restante puede ser abonado hasta la fecha de la sesión, de forma práctica y flexible.<br><br>Aceptamos: efectivo o transferencia.</div></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1934,71 +1943,25 @@
 </script>
 <script>
   (function() {
-    var fab  = document.getElementById('swipe-fab');
-    var grid = document.querySelector('.planes-grid');
-    var section = document.getElementById('planes');
-    if (!fab || !grid || !section) return;
+    var fab = document.getElementById('swipe-fab');
+    if (!fab) return;
 
-    // Solo mobile
+    // Solo activo en mobile
     if (window.innerWidth >= 768) { fab.style.display = 'none'; return; }
 
-    var dismissed = false;   // true mientras el carrusel ya fue usado en esta visita
-
-    function show() {
-      fab.style.display = 'flex';
-      fab.classList.remove('hidden');
-      // reinicia animación
-      fab.style.animation = 'none';
-      fab.offsetHeight; // reflow
-      fab.style.animation = '';
-    }
-
-    function hide() {
+    function dismiss() {
       fab.classList.add('hidden');
       setTimeout(function() { fab.style.display = 'none'; }, 320);
     }
 
-    // Al tocar o deslizar: ocultar Y marcar como "ya usó el carrusel"
-    function dismissForever() {
-      dismissed = true;
-      hide();
-    }
-
-    fab.addEventListener('touchstart', function() {
-      // toca el ícono: desliza al siguiente plan
-      var card = grid.querySelector('.plan-card');
-      if (card) grid.scrollBy({ left: card.offsetWidth + 10, behavior: 'smooth' });
-      dismissForever();
-    }, { passive: true });
-
-    fab.addEventListener('click', function() {
-      var card = grid.querySelector('.plan-card');
-      if (card) grid.scrollBy({ left: card.offsetWidth + 10, behavior: 'smooth' });
-      dismissForever();
-    });
-
-    grid.addEventListener('scroll', function() {
-      if (!dismissed) dismissForever();
-    }, { passive: true, once: true });
-
-    // IntersectionObserver: reaparece cada vez que la sección entra en viewport
-    // PERO no reaparece si el usuario ya usó el carrusel (dismissed = true)
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting && !dismissed) {
-          show();
-        } else if (!entry.isIntersecting) {
-          // al salir de vista: ocultar sin marcar dismissed
-          fab.style.display = 'none';
-          fab.classList.remove('hidden');
-        }
-      });
-    }, { threshold: 0.2 });
-
-    io.observe(section);
+    fab.addEventListener('touchstart', dismiss, { passive: true });
+    fab.addEventListener('click', dismiss);
+    var grid = document.querySelector('.planes-grid');
+    if (grid) grid.addEventListener('scroll', dismiss, { passive: true, once: true });
   })();
 </script>
 
 </body>
 </html>
+
 
