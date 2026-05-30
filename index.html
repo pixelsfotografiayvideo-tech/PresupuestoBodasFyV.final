@@ -11,10 +11,6 @@
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777600480/camara_z0x9ag.png" />
 
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wqsbc7b45d");
-  </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -684,6 +680,15 @@
         font-weight: 600;
         color: var(--gold);
         text-shadow: 0 0 12px rgba(201,169,110,0.6), 0 0 24px rgba(201,169,110,0.3);
+        background: rgba(201,169,110,0.08);
+        border: 1px solid rgba(201,169,110,0.2);
+        border-radius: 40px;
+        padding: 10px 20px;
+        animation: hintBarPulse 2.5s ease-in-out infinite;
+      }
+      @keyframes hintBarPulse {
+        0%, 100% { background: rgba(201,169,110,0.06); border-color: rgba(201,169,110,0.18); }
+        50%  { background: rgba(201,169,110,0.14); border-color: rgba(201,169,110,0.4); }
       }
       .planes-swipe-hint .swipe-text {
         animation: textPulse 2.5s ease-in-out infinite;
@@ -699,24 +704,29 @@
       }
       #swipe-fab {
         position: absolute;
-        right: -18px;
+        right: -4px;
         top: 50%;
         transform: translateY(-50%);
         z-index: 999;
-        width: 52px;
-        height: 52px;
+        width: 56px;
+        height: 56px;
         border-radius: 50%;
         border: 2px solid var(--gold);
-        background: rgba(10,10,10,0.82);
-        backdrop-filter: blur(6px);
+        background: rgba(10,10,10,0.9);
+        backdrop-filter: blur(8px);
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        animation: fabBounce 1.4s ease-in-out infinite, fabFadeIn 0.5s ease forwards;
-        box-shadow: 0 0 14px rgba(201,169,110,0.35);
+        animation: fabBounce 1.2s ease-in-out infinite, fabFadeIn 0.5s ease forwards, fabRing 2s ease-in-out infinite;
+        box-shadow: 0 0 0 0 rgba(201,169,110,0.5), 0 0 18px rgba(201,169,110,0.4);
         opacity: 0;
         pointer-events: auto;
+      }
+      @keyframes fabRing {
+        0%   { box-shadow: 0 0 0 0 rgba(201,169,110,0.55), 0 0 14px rgba(201,169,110,0.3); }
+        60%  { box-shadow: 0 0 0 12px rgba(201,169,110,0), 0 0 22px rgba(201,169,110,0.5); }
+        100% { box-shadow: 0 0 0 0 rgba(201,169,110,0), 0 0 14px rgba(201,169,110,0.3); }
       }
       @keyframes fabFadeIn {
         to { opacity: 1; }
@@ -824,6 +834,166 @@
       color: rgba(255,255,255,0.3);
       letter-spacing: 0.08em;
     }
+
+    /* ══════════════════════════════════════
+       COMPARATIVA DE PAQUETES
+    ══════════════════════════════════════ */
+    #comparativa {
+      background: var(--dark);
+      padding: 100px 24px;
+      color: var(--cream);
+    }
+    .comparativa-inner { max-width: var(--max-w); margin: 0 auto; }
+    .comparativa-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .comparativa-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+    .comparativa-header h2 em { font-style: italic; color: var(--gold-lt); }
+
+    /* Tabla */
+    .comp-table-wrap {
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    .comp-table th,
+    .comp-table td {
+      padding: 14px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .comp-table th:first-child,
+    .comp-table td:first-child {
+      text-align: left;
+      width: 44%;
+      color: rgba(255,255,255,0.75);
+      font-weight: 300;
+    }
+    /* Header row */
+    .comp-table thead th {
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 18px;
+    }
+    .comp-table thead th.col-feat {
+      background: var(--cream);
+      color: var(--dark2);
+      border-radius: 12px 12px 0 0;
+      letter-spacing: 0.2em;
+    }
+    .comp-table thead th.col-feat .feat-star {
+      color: var(--gold);
+      margin-left: 4px;
+    }
+    /* Featured column body */
+    .comp-table td.col-feat {
+      background: rgba(245,240,232,0.05);
+      border-bottom: 1px solid rgba(245,240,232,0.08);
+    }
+    /* Value cell — italic text (horas) */
+    .comp-table td.val-text {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.55);
+    }
+    .comp-table td.val-text.col-feat { color: var(--cream); }
+    /* Check / cross icons */
+    .comp-check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.7rem;
+    }
+    .comp-check.yes {
+      background: rgba(201,169,110,0.18);
+      color: var(--gold);
+    }
+    td.col-feat .comp-check.yes {
+      background: rgba(201,169,110,0.28);
+      color: var(--gold-lt);
+    }
+    .comp-check.no {
+      background: transparent;
+      color: rgba(255,255,255,0.18);
+      font-size: 0.8rem;
+    }
+    /* CTA bajo la tabla */
+    .comp-cta {
+      text-align: center;
+      margin-top: 52px;
+    }
+    .comp-cta a {
+      display: inline-block;
+      border: 1px solid rgba(201,169,110,0.5);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 18px 44px;
+      transition: border-color 0.3s, background 0.3s, color 0.3s;
+    }
+    .comp-cta a:hover {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--dark);
+    }
+    /* ── MOBILE: tabla compacta responsive ── */
+    @media (max-width: 700px) {
+      #comparativa { padding: 64px 16px 72px; }
+      .comparativa-header { margin-bottom: 36px; }
+      .comp-table-wrap { padding: 0; }
+      .comp-table { font-size: 0.72rem; }
+      .comp-table th:first-child,
+      .comp-table td:first-child { width: 42%; padding: 13px 10px; font-size: 0.7rem; }
+      .comp-table th,
+      .comp-table td { padding: 13px 6px; }
+      .comp-table thead th { font-size: 0.55rem; letter-spacing: 0.18em; }
+      .comp-table thead th.col-feat { font-size: 0.6rem; }
+      .comp-check { width: 22px; height: 22px; font-size: 0.6rem; }
+      .comp-table td.val-text { font-size: 0.78rem; }
+      .comp-cta a { padding: 16px 28px; font-size: 0.65rem; letter-spacing: 0.16em; }
+    }
+
+
+    /* ── PRECIO DESTACADO dentro de la card ── */
+    .plan-inversion-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 6px;
+    }
+    .plan-price-big {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 28px;
+    }
+    .plan-card.featured .plan-price-big { color: var(--gold-lt); }
 
     /* ══════════════════════════════════════
        TESTIMONIOS — dark with images
@@ -1330,7 +1500,7 @@
     <li><a href="#planes">Planes</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-  <a class="btn-wa nav-cta" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Quiero%20una%20reuni%C3%B3n%20para%20hablar%20sobre%20mi%20boda" target="_blank" rel="noopener">
+  <a class="btn-wa nav-cta" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Quiero%20una%20reuni%C3%B3n%20para%20hablar%20sobre%20mi%20boda" target="_blank" rel="noopener">
     <svg class="wa-icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     QUIERO UNA REUNIÓN
   </a>
@@ -1350,7 +1520,7 @@
     </h1>
     <p class="hero-sub">Fotografía para parejas que no quieren fotos bonitas — quieren volver a sentir ese día dentro de 10 años.</p>
     <div class="hero-actions">
-      <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Quiero%20ver%20si%20mi%20fecha%20sigue%20libre" target="_blank" rel="noopener">
+      <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Quiero%20ver%20si%20mi%20fecha%20sigue%20libre" target="_blank" rel="noopener">
         <svg class="wa-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Ver si tu fecha sigue libre
       </a>
@@ -1446,7 +1616,7 @@
   </div>
 
   <div class="portfolio-cta reveal">
-    <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Quisiera%20ver%20una%20boda%20completa%20antes%20de%20decidir%2C%20%C2%BFme%20pod%C3%A9s%20mandar%20una%20galer%C3%ADa%3F" target="_blank" rel="noopener">
+    <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Quisiera%20ver%20una%20boda%20completa%20antes%20de%20decidir%2C%20%C2%BFme%20pod%C3%A9s%20mandar%20una%20galer%C3%ADa%3F" target="_blank" rel="noopener">
       <svg class="wa-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Pedí ver una boda completa
     </a>
@@ -1471,7 +1641,7 @@
         <p class="tagline">"No quiero que recuerdes que estuve ahí. Quiero que, cuando veas las fotos, sientas que volvés a estar ahí."</p>
         <p>Llevo más de 10 años fotografiando bodas en Córdoba Capital. Lo que me diferencia no es el equipo — es la forma en que trabajo: discreto, atento a lo que nadie más ve, listo para el momento antes de que ocurra.</p>
         <p>Trabajo con un número limitado de parejas por mes para poder dedicarme completamente a cada una. Porque para mí, tu boda no es un trabajo más.</p>
-        <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Quiero%20hablar%20con%20Marcos%20y%20conocer%20m%C3%A1s%20sobre%20su%20trabajo" target="_blank" rel="noopener" style="margin-top: 8px;">
+        <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Quiero%20hablar%20con%20Marcos%20y%20conocer%20m%C3%A1s%20sobre%20su%20trabajo" target="_blank" rel="noopener" style="margin-top: 8px;">
           <svg class="wa-icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Hablar con Marcos
         </a>
@@ -1547,6 +1717,8 @@
         <div class="plan-title">Boda Íntima</div>
         <div class="plan-ideal">Ceremonia civil, unión convivencial o festejo reducido</div>
         <div class="plan-divider"></div>
+        <div class="plan-inversion-label">Inversión</div>
+        <div class="plan-price-big">DESDE $450.000</div>
         <ul class="plan-items">
           <li>Fotos digitales de todo el evento.</li>
           <li>Imágenes editadas en alta resolución.</li>
@@ -1554,8 +1726,8 @@
           <li>Cobertura de 6 Hs.</li>
           <li>Edición profesional de luz y color.</li>
         </ul>
-        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Boda%20%C3%8Dntima%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="border:1px solid var(--gold);background:transparent;color:var(--gold);display:flex;align-items:center;gap:10px;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.3s;">
-          CONTRATAR DESDE $450.000
+        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Boda%20%C3%8Dntima%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="border:1px solid var(--gold);background:transparent;color:var(--gold);display:flex;align-items:center;justify-content:center;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.3s,color 0.3s;">
+          CONTRATAR ESTE PLAN
         </a>
       </div>
 
@@ -1566,6 +1738,8 @@
         <div class="plan-title">Boda Completa</div>
         <div class="plan-ideal">El más elegido. Cobertura total sin límite de tiempo.</div>
         <div class="plan-divider"></div>
+        <div class="plan-inversion-label">Inversión</div>
+        <div class="plan-price-big">DESDE $590.000</div>
         <ul class="plan-items">
           <li>Fotos digitales de todo el evento.</li>
           <li>Imágenes editadas en alta resolución.</li>
@@ -1574,8 +1748,8 @@
           <li>Preparativos · Ceremonia · Fiesta.</li>
           <li>Edición profesional de luz, contraste y color.</li>
         </ul>
-        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Boda%20Completa%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="background:var(--gold);color:var(--dark);display:flex;align-items:center;gap:10px;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;border:none;">
-          CONTRATAR DESDE $590.000
+        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Boda%20Completa%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="background:var(--gold);color:var(--dark);display:flex;align-items:center;justify-content:center;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;border:none;">
+          LO QUEREMOS
         </a>
       </div>
 
@@ -1585,20 +1759,119 @@
         <div class="plan-title">Foto + Video</div>
         <div class="plan-ideal">Para los que quieren revivir el día completo, no solo verlo en fotos</div>
         <div class="plan-divider"></div>
+        <div class="plan-inversion-label">Inversión</div>
+        <div class="plan-price-big">DESDE $1.290.000</div>
         <ul class="plan-items">
           <li>Todo lo del Plan 02 incluido.</li>
           <li>Pre-Boda.</li>
           <li>Video de la pareja para el salón.</li>
           <li>Video Extendido (25-35 min) según evento.</li>
           <li>Tomas aéreas con Drone.</li>
+          <li>Tarjeta de invitación digital.</li>
           <li>Ver Adicionales: Álbum impreso y más.</li>
         </ul>
-        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Foto%20%2B%20Video%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="border:1px solid var(--gold);background:transparent;color:var(--gold);display:flex;align-items:center;gap:10px;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.3s;">
-          CONTRATAR DESDE $1.290.000
+        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Foto%20%2B%20Video%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="border:1px solid var(--gold);background:transparent;color:var(--gold);display:flex;align-items:center;justify-content:center;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.3s,color 0.3s;">
+          CONTRATAR ESTE PLAN
         </a>
       </div>
     </div>
     <p class="planes-footer">Todos los planes incluyen contrato + reserva de fecha. Cada evento es distinto, por eso podemos personalizar la propuesta según lo que necesiten.</p>
+  </div>
+</section>
+
+<!-- ══════ COMPARATIVA ══════ -->
+<section id="comparativa">
+  <div class="comparativa-inner">
+    <div class="comparativa-header reveal">
+      <p class="section-eyebrow">Comparativa</p>
+      <h2>Comparativa de <em>paquetes</em></h2>
+    </div>
+    <div class="comp-table-wrap reveal">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Incluye</th>
+            <th>P1</th>
+            <th class="col-feat">P2 <span class="feat-star">★</span></th>
+            <th>P3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Horas de cobertura</td>
+            <td class="val-text">6 hs</td>
+            <td class="val-text col-feat">9 hs</td>
+            <td class="val-text">9 hs +</td>
+          </tr>
+          <tr>
+            <td>Fotos digitales editadas en alta resolución</td>
+            <td><span class="comp-check yes">✓</span></td>
+            <td class="col-feat"><span class="comp-check yes">✓</span></td>
+            <td><span class="comp-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Galería digital privada</td>
+            <td><span class="comp-check yes">✓</span></td>
+            <td class="col-feat"><span class="comp-check yes">✓</span></td>
+            <td><span class="comp-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Preparativos · Ceremonia · Fiesta</td>
+            <td><span class="comp-check no">✕</span></td>
+            <td class="col-feat"><span class="comp-check yes">✓</span></td>
+            <td><span class="comp-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Galería digital + Pendrive</td>
+            <td><span class="comp-check no">✕</span></td>
+            <td class="col-feat"><span class="comp-check yes">✓</span></td>
+            <td><span class="comp-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Edición profesional de luz, contraste y color</td>
+            <td><span class="comp-check no">✕</span></td>
+            <td class="col-feat"><span class="comp-check yes">✓</span></td>
+            <td><span class="comp-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Pre-Boda</td>
+            <td><span class="comp-check no">✕</span></td>
+            <td class="col-feat"><span class="comp-check no">✕</span></td>
+            <td><span class="comp-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Video de la pareja para el salón</td>
+            <td><span class="comp-check no">✕</span></td>
+            <td class="col-feat"><span class="comp-check no">✕</span></td>
+            <td><span class="comp-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Video Extendido del evento (25–35 min)</td>
+            <td><span class="comp-check no">✕</span></td>
+            <td class="col-feat"><span class="comp-check no">✕</span></td>
+            <td><span class="comp-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Tomas aéreas con Drone</td>
+            <td><span class="comp-check no">✕</span></td>
+            <td class="col-feat"><span class="comp-check no">✕</span></td>
+            <td><span class="comp-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Tarjeta de invitación digital</td>
+            <td><span class="comp-check no">✕</span></td>
+            <td class="col-feat"><span class="comp-check no">✕</span></td>
+            <td><span class="comp-check yes">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="comp-cta reveal">
+      <a href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Quisiera%20saber%20cu%C3%A1l%20plan%20es%20el%20mejor%20para%20mi%20boda" target="_blank" rel="noopener">
+        Quiero saber cuál es para mí →
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1732,7 +2005,7 @@
     <h2>Las fechas<br>importantes<br><em>no esperan.</em></h2>
     <p>Si tu boda es importante para vos, asegurá tu fecha antes de que alguien más lo haga. +120 bodas fotografiadas. Solo tomamos 4 por mes.</p>
     <div class="cta-final-btns">
-      <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Quiero%20contratar%20y%20reservar%20mi%20fecha%2C%20%C2%BFsigue%20disponible%3F" target="_blank" rel="noopener">
+      <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Quiero%20contratar%20y%20reservar%20mi%20fecha%2C%20%C2%BFsigue%20disponible%3F" target="_blank" rel="noopener">
         <svg class="wa-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         QUIERO CONTRATAR
       </a>
@@ -1759,7 +2032,7 @@
 </footer>
 
 <!-- ══════ FLOATING WA ══════ -->
-<a class="float-wa" href="https://api.whatsapp.com/send?phone=+543517364379&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+<a class="float-wa" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   <span class="float-wa-label">¿Tenés dudas? Consultanos.</span>
 </a>
@@ -1784,7 +2057,7 @@
   "name": "Pixels Fotografía y Video",
   "description": "Fotógrafo de bodas en Córdoba Capital, Argentina. Más de 120 bodas fotografiadas.",
   "url": "https://pixelsfotografiayvideo.com",
-  "telephone": "+543517364379",
+  "telephone": "+543512518671",
   "image": "https://res.cloudinary.com/dgo3agrzb/image/upload/v1777600482/story_1771294514407_unwirv.jpg",
   "address": { "@type": "PostalAddress", "addressLocality": "Córdoba", "addressRegion": "Córdoba", "addressCountry": "AR" },
   "geo": { "@type": "GeoCoordinates", "latitude": -31.4201, "longitude": -64.1888 },
@@ -1971,6 +2244,9 @@
 
 </body>
 </html>
+
+
+
 
 
 
