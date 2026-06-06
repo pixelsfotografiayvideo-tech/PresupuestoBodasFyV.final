@@ -647,192 +647,254 @@
       max-width: 280px;
       line-height: 1.7;
     }
-    .planes-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2px;
-    }
-    @media (max-width: 767px) {
-      .planes-grid {
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        gap: 10px;
-        padding: 4px 4px 20px;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-      .planes-grid::-webkit-scrollbar { display: none; }
-      .planes-grid .plan-card {
-        flex: 0 0 82vw;
-        max-width: 320px;
-        scroll-snap-align: start;
-      }
-      .planes-swipe-hint {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 20px;
-        font-size: 0.72rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        font-weight: 600;
-        color: var(--gold);
-        text-shadow: 0 0 12px rgba(201,169,110,0.6), 0 0 24px rgba(201,169,110,0.3);
-        background: rgba(201,169,110,0.08);
-        border: 1px solid rgba(201,169,110,0.2);
-        border-radius: 40px;
-        padding: 10px 20px;
-        animation: hintBarPulse 2.5s ease-in-out infinite;
-      }
-      @keyframes hintBarPulse {
-        0%, 100% { background: rgba(201,169,110,0.06); border-color: rgba(201,169,110,0.18); }
-        50%  { background: rgba(201,169,110,0.14); border-color: rgba(201,169,110,0.4); }
-      }
-      .planes-swipe-hint .swipe-text {
-        animation: textPulse 2.5s ease-in-out infinite;
-      }
-      @keyframes textPulse {
-        0%, 100% { opacity: 0.7; }
-        50% { opacity: 1; text-shadow: 0 0 16px rgba(201,169,110,0.9); }
-      }
-
-      /* Floating circle arrow — solo mobile */
-      .planes-grid {
-        position: relative;
-      }
-      #swipe-fab {
-        position: absolute;
-        right: -4px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 999;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        border: 2px solid var(--gold);
-        background: rgba(10,10,10,0.9);
-        backdrop-filter: blur(8px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        animation: fabBounce 1.2s ease-in-out infinite, fabFadeIn 0.5s ease forwards, fabRing 2s ease-in-out infinite;
-        box-shadow: 0 0 0 0 rgba(201,169,110,0.5), 0 0 18px rgba(201,169,110,0.4);
-        opacity: 0;
-        pointer-events: auto;
-      }
-      @keyframes fabRing {
-        0%   { box-shadow: 0 0 0 0 rgba(201,169,110,0.55), 0 0 14px rgba(201,169,110,0.3); }
-        60%  { box-shadow: 0 0 0 12px rgba(201,169,110,0), 0 0 22px rgba(201,169,110,0.5); }
-        100% { box-shadow: 0 0 0 0 rgba(201,169,110,0), 0 0 14px rgba(201,169,110,0.3); }
-      }
-      @keyframes fabFadeIn {
-        to { opacity: 1; }
-      }
-      @keyframes fabBounce {
-        0%, 100% { transform: translateY(-50%) translateX(0); box-shadow: 0 0 8px rgba(201,169,110,0.3); }
-        50%       { transform: translateY(-50%) translateX(-6px); box-shadow: 0 0 20px rgba(201,169,110,0.6); }
-      }
-      #swipe-fab svg {
-        width: 26px;
-        height: 26px;
-        stroke: var(--gold);
-        stroke-width: 2;
-      }
-      #swipe-fab.hidden {
-        animation: fabFadeOut 0.3s ease forwards !important;
-        pointer-events: none;
-      }
-      @keyframes fabFadeOut {
-        to { opacity: 0; transform: translateY(-50%) scale(0.6); }
-      }
-
-      .planes-swipe-hint svg {
-        animation: swipeHint 1.8s ease-in-out infinite;
-      }
-      @keyframes swipeHint {
-        0%, 100% { transform: translateX(0); opacity: 0.5; }
-        50% { transform: translateX(5px); opacity: 1; }
-      }
-      @keyframes btnPulse {
-        0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201,169,110,0); }
-        50%       { transform: scale(1.025); box-shadow: 0 0 0 6px rgba(201,169,110,0.15); }
-      }
-      .plan-btn-mobile {
-        animation: btnPulse 2.4s ease-in-out infinite;
-      }
-    }
-    @media (min-width: 768px) {
-      .planes-grid { grid-template-columns: repeat(3, 1fr); }
-      .planes-swipe-hint { display: none; }
-    }
-    .plan-card {
-      padding: 40px 32px;
-      border: 1px solid rgba(255,255,255,0.07);
-      position: relative;
-      transition: border-color 0.3s, background 0.3s;
-    }
-    .plan-card:hover { border-color: rgba(201,169,110,0.5); background: rgba(201,169,110,0.04); }
-    .plan-card.featured {
-      border-color: var(--gold);
-      background: rgba(201,169,110,0.06);
-    }
-    .plan-badge {
-      position: absolute;
-      top: -1px; left: 32px;
-      background: var(--gold);
-      color: var(--dark);
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 5px 14px;
-    }
-    .plan-num {
-      font-family: var(--font-display);
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.6;
-      margin-bottom: 14px;
-    }
-    .plan-title {
-      font-family: var(--font-display);
-      font-size: 1.9rem;
-      font-weight: 300;
-      margin-bottom: 6px;
-    }
-    .plan-ideal {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.35);
-      font-style: italic;
-      margin-bottom: 32px;
-    }
-    .plan-divider {
-      width: 32px; height: 1px;
-      background: rgba(201,169,110,0.35);
-      margin-bottom: 28px;
-    }
-    .plan-items { list-style: none; margin-bottom: 36px; }
-    .plan-items li {
-      font-size: 0.84rem;
-      color: rgba(255,255,255,0.65);
-      padding: 9px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-    .plan-items li::before { content: '—'; color: var(--gold); opacity: 0.6; flex-shrink: 0; }
     .planes-footer {
       text-align: center;
       margin-top: 40px;
       font-size: 0.78rem;
       color: rgba(255,255,255,0.3);
       letter-spacing: 0.08em;
+    }
+
+    /* ── EV-CARDS (3-col package layout igual que index_de_15) ── */
+    .ev-cards-hint {
+      display: none;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--gold-lt);
+      margin-bottom: 14px;
+      animation: hint-blink 2.5s ease-in-out infinite;
+    }
+    @keyframes hint-blink { 0%,100%{opacity:.5} 50%{opacity:1} }
+
+    .ev-snap-dots {
+      display: none;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 16px;
+    }
+    .ev-snap-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: none; padding: 0;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .ev-snap-dot.active { background: var(--gold); width: 18px; border-radius: 3px; }
+
+    .ev-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .ev-card {
+      border-right: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .ev-card:last-child { border-right: none; }
+    .ev-card-featured {
+      background: rgba(255,255,255,0.05);
+      border-right: 1px solid rgba(255,255,255,0.2);
+      border-left: 1px solid rgba(255,255,255,0.2);
+    }
+    .ev-card-badge-top {
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 5px 14px;
+      white-space: nowrap;
+    }
+    .ev-card-header {
+      padding: 36px 24px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .ev-card-label {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--gold-lt);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .ev-card-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .ev-card-title em { font-style: italic; color: var(--gold-lt); }
+    .ev-card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+    .ev-inv-label {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+    }
+    .ev-price {
+      font-family: var(--font-body);
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      margin-top: -8px;
+    }
+    .ev-card-featured .ev-price { color: var(--gold-lt); }
+    .ev-features {
+      list-style: none;
+      padding: 0; margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .ev-features li {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.4;
+      padding-left: 14px;
+      position: relative;
+    }
+    .ev-features li::before { content: '·'; position: absolute; left: 0; color: var(--gold); }
+    .ev-features-plus li::before { content: '+'; color: var(--gold); }
+    .ev-includes-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 14px 16px;
+    }
+    .ev-includes-title {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .ev-gift {
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      background: rgba(201,169,110,0.08);
+      border: 1px solid rgba(201,169,110,0.2);
+      padding: 10px 14px;
+    }
+    .ev-gift strong { color: var(--gold-lt); }
+    .ev-ideal {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .ev-btn {
+      display: block;
+      text-align: center;
+      margin-top: auto;
+      padding: 14px 16px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.8);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.35s, border-color 0.35s;
+      z-index: 0;
+    }
+    .ev-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--white);
+      transform: translateX(-101%);
+      transition: transform 0.38s cubic-bezier(.4,0,.2,1);
+      z-index: -1;
+    }
+    .ev-btn:hover { color: var(--black); border-color: var(--white); }
+    .ev-btn:hover::before { transform: translateX(0); }
+    .ev-btn-highlight {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+      animation: ev-btn-pulse 2.4s ease-in-out infinite;
+    }
+    .ev-btn-highlight::before { background: var(--gold-lt); }
+    .ev-btn-highlight:hover { color: var(--black); border-color: var(--gold-lt); animation: none; }
+    .ev-btn-highlight:hover::before { transform: translateX(0); }
+    @keyframes ev-btn-pulse {
+      0%   { box-shadow: 0 0 0px rgba(201,169,110,0);    border-color: var(--gold); }
+      40%  { box-shadow: 0 0 18px rgba(201,169,110,0.7); border-color: var(--gold-lt); }
+      60%  { box-shadow: 0 0 18px rgba(201,169,110,0.7); border-color: var(--gold-lt); }
+      100% { box-shadow: 0 0 0px rgba(201,169,110,0);    border-color: var(--gold); }
+    }
+    .ev-btn-highlight::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+      animation: ev-shimmer 3s ease-in-out infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    @keyframes ev-shimmer {
+      0%   { left: -75%; opacity: 0; }
+      10%  { opacity: 1; }
+      50%  { left: 125%; opacity: 1; }
+      51%  { opacity: 0; }
+      100% { left: 125%; opacity: 0; }
+    }
+
+    /* ── MOBILE responsive ev-cards ── */
+    @media (max-width: 767px) {
+      .ev-cards {
+        display: flex !important;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 0;
+        border: none;
+        padding-bottom: 4px;
+      }
+      .ev-cards::-webkit-scrollbar { display: none; }
+      .ev-card {
+        flex: 0 0 85%;
+        min-width: 85%;
+        scroll-snap-align: start;
+        border: 1px solid rgba(255,255,255,0.12);
+        margin-right: 12px;
+      }
+      .ev-card:last-child { margin-right: 0; }
+      .ev-card-featured { border: 1px solid rgba(255,255,255,0.25) !important; }
+      .ev-cards-hint { display: flex !important; }
+      .ev-snap-dots { display: flex !important; }
     }
 
     /* ══════════════════════════════════════
@@ -975,25 +1037,6 @@
       .comp-cta a { padding: 16px 28px; font-size: 0.65rem; letter-spacing: 0.16em; }
     }
 
-
-    /* ── PRECIO DESTACADO dentro de la card ── */
-    .plan-inversion-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.7;
-      margin-bottom: 6px;
-    }
-    .plan-price-big {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4.5vw, 2.8rem);
-      font-weight: 300;
-      color: var(--cream);
-      line-height: 1;
-      margin-bottom: 28px;
-    }
-    .plan-card.featured .plan-price-big { color: var(--gold-lt); }
 
     /* ══════════════════════════════════════
        TESTIMONIOS — dark with images
@@ -1700,81 +1743,86 @@
       </div>
       <p>Todas las coberturas incluyen edición profesional, galería digital en alta resolución y adelanto al día siguiente.</p>
     </div>
-    <div class="planes-swipe-hint">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      <span class="swipe-text">deslizá para ver los planes</span>
-    </div>
-    <div class="planes-grid">
-      <!-- FAB swipe hint — solo mobile -->
-      <div id="swipe-fab" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 18l-6-6 6-6"/>
-        </svg>
-      </div>
-      <!-- Plan 1 -->
-      <div class="plan-card reveal">
-        <div class="plan-num">Plan 01</div>
-        <div class="plan-title">Boda Íntima</div>
-        <div class="plan-ideal">Ceremonia civil, unión convivencial o festejo reducido</div>
-        <div class="plan-divider"></div>
-        <div class="plan-inversion-label">Inversión</div>
-        <div class="plan-price-big">DESDE $450.000</div>
-        <ul class="plan-items">
-          <li>Fotos digitales de todo el evento.</li>
-          <li>Imágenes editadas en alta resolución.</li>
-          <li>Galería digital.</li>
-          <li>Cobertura de 6 Hs.</li>
-          <li>Edición profesional de luz y color.</li>
-        </ul>
-        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Boda%20%C3%8Dntima%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="border:1px solid var(--gold);background:transparent;color:var(--gold);display:flex;align-items:center;justify-content:center;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.3s,color 0.3s;">
-          CONTRATAR ESTE PLAN
-        </a>
+
+    <div class="ev-cards-hint">→ DESLIZÁ PARA VER LOS PLANES</div>
+    <div class="ev-cards" id="ev-cards-bodas">
+
+      <!-- Card 1 -->
+      <div class="ev-card">
+        <div class="ev-card-header">
+          <div class="ev-card-label">PLAN 01 — BODA ÍNTIMA</div>
+          <div class="ev-card-title">Boda<br>Íntima</div>
+        </div>
+        <div class="ev-card-body">
+          <div class="ev-inv-label">INVERSIÓN</div>
+          <div class="ev-price">DESDE $450.000</div>
+          <ul class="ev-features">
+            <li>Fotos digitales de todo el evento</li>
+            <li>Imágenes editadas en alta resolución</li>
+            <li>Galería digital</li>
+            <li>Cobertura de 6 Hs.</li>
+            <li>Edición profesional de luz y color</li>
+          </ul>
+          <div class="ev-gift">🎁 <strong>Regalo:</strong> Galería online privada permanente</div>
+          <a class="ev-btn" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Me%20interesa%20el%20Plan%20Boda%20%C3%8Dntima%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener">CONTRATAR ESTE PLAN</a>
+        </div>
       </div>
 
-      <!-- Plan 2 — FEATURED -->
-      <div class="plan-card featured reveal">
-        <div class="plan-badge">Más elegido</div>
-        <div class="plan-num">Plan 02</div>
-        <div class="plan-title">Boda Completa</div>
-        <div class="plan-ideal">El más elegido. Cobertura total sin límite de tiempo.</div>
-        <div class="plan-divider"></div>
-        <div class="plan-inversion-label">Inversión</div>
-        <div class="plan-price-big">DESDE $590.000</div>
-        <ul class="plan-items">
-          <li>Fotos digitales de todo el evento.</li>
-          <li>Imágenes editadas en alta resolución.</li>
-          <li>Galería digital + pendrive.</li>
-          <li>Cobertura completa de 9 Hs.</li>
-          <li>Preparativos · Ceremonia · Fiesta.</li>
-          <li>Edición profesional de luz, contraste y color.</li>
-        </ul>
-        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Boda%20Completa%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="background:var(--gold);color:var(--dark);display:flex;align-items:center;justify-content:center;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;border:none;">
-          LO QUEREMOS
-        </a>
+      <!-- Card 2 — FEATURED -->
+      <div class="ev-card ev-card-featured">
+        <div class="ev-card-badge-top">MÁS ELEGIDO</div>
+        <div class="ev-card-header">
+          <div class="ev-card-label">PLAN 02 — BODA COMPLETA</div>
+          <div class="ev-card-title">Boda<br><em>Completa</em></div>
+        </div>
+        <div class="ev-card-body">
+          <div class="ev-inv-label">INVERSIÓN</div>
+          <div class="ev-price">DESDE $590.000</div>
+          <ul class="ev-features">
+            <li>Fotos digitales de todo el evento</li>
+            <li>Imágenes editadas en alta resolución</li>
+            <li>Galería digital + pendrive</li>
+            <li>Cobertura completa de 9 Hs.</li>
+            <li>Preparativos · Ceremonia · Fiesta</li>
+            <li>Edición profesional de luz, contraste y color</li>
+          </ul>
+          <div class="ev-gift">🎁 <strong>Regalo:</strong> Video de Fotos cronológico</div>
+          <p class="ev-ideal"><em>El más elegido. Cobertura total sin límite de tiempo.</em></p>
+          <a class="ev-btn ev-btn-highlight" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Me%20interesa%20el%20Plan%20Boda%20Completa%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener">LO QUEREMOS</a>
+        </div>
       </div>
 
-      <!-- Plan 3 -->
-      <div class="plan-card reveal">
-        <div class="plan-num">Plan 03</div>
-        <div class="plan-title">Foto + Video</div>
-        <div class="plan-ideal">Para los que quieren revivir el día completo, no solo verlo en fotos</div>
-        <div class="plan-divider"></div>
-        <div class="plan-inversion-label">Inversión</div>
-        <div class="plan-price-big">DESDE $1.290.000</div>
-        <ul class="plan-items">
-          <li>Todo lo del Plan 02 incluido.</li>
-          <li>Pre-Boda.</li>
-          <li>Video de la pareja para el salón.</li>
-          <li>Video Extendido (25-35 min) según evento.</li>
-          <li>Tomas aéreas con Drone.</li>
-          <li>Tarjeta de invitación digital.</li>
-          <li>Ver Adicionales: Álbum impreso y más.</li>
-        </ul>
-        <a class="btn-wa plan-btn-mobile" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Tengo%20una%20duda%3A%20me%20interesa%20el%20Plan%20Foto%20%2B%20Video%2C%20%C2%BFpodemos%20hablar%20sobre%20mi%20fecha%3F" target="_blank" rel="noopener" style="border:1px solid var(--gold);background:transparent;color:var(--gold);display:flex;align-items:center;justify-content:center;padding:16px 28px;font-family:var(--font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:background 0.3s,color 0.3s;">
-          CONTRATAR ESTE PLAN
-        </a>
+      <!-- Card 3 -->
+      <div class="ev-card">
+        <div class="ev-card-header">
+          <div class="ev-card-label">PLAN 03 — BODA FULL</div>
+          <div class="ev-card-title">Foto + Pre-Boda<br>+ <em>Video completo</em></div>
+        </div>
+        <div class="ev-card-body">
+          <div class="ev-inv-label">INVERSIÓN</div>
+          <div class="ev-price">DESDE $1.290.000</div>
+          <div class="ev-includes-box">
+            <div class="ev-includes-title">TODO LO DEL PLAN 02, MÁS:</div>
+            <ul class="ev-features ev-features-plus">
+              <li>Pre-Boda</li>
+              <li>Video de la pareja para el salón</li>
+              <li>Video Extendido (25-35 min) según evento</li>
+              <li>Tomas aéreas con Drone</li>
+            </ul>
+          </div>
+          <div class="ev-gift">🎁 <strong>Regalo:</strong> Pendrive + Tarjeta de invitación</div>
+          <p class="ev-ideal"><em>Para los que quieren revivir el día completo, no solo verlo en fotos.</em></p>
+          <a class="ev-btn" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Me%20interesa%20el%20Plan%20Foto%20%2B%20Video%20para%20mi%20boda%2C%20%C2%BFpodemos%20hablar%3F" target="_blank" rel="noopener">CONTRATAR ESTE PLAN</a>
+        </div>
       </div>
+
+    </div><!-- /ev-cards -->
+    <div class="ev-snap-dots" id="dots-bodas">
+      <button class="ev-snap-dot active"></button>
+      <button class="ev-snap-dot"></button>
+      <button class="ev-snap-dot"></button>
     </div>
+
     <p class="planes-footer">Todos los planes incluyen contrato + reserva de fecha. Cada evento es distinto, por eso podemos personalizar la propuesta según lo que necesiten.</p>
   </div>
 </section>
@@ -2223,28 +2271,29 @@
   })();
 </script>
 <script>
-  (function() {
-    var fab = document.getElementById('swipe-fab');
-    if (!fab) return;
-
-    // Solo activo en mobile
-    if (window.innerWidth >= 768) { fab.style.display = 'none'; return; }
-
-    function dismiss() {
-      fab.classList.add('hidden');
-      setTimeout(function() { fab.style.display = 'none'; }, 320);
-    }
-
-    fab.addEventListener('touchstart', dismiss, { passive: true });
-    fab.addEventListener('click', dismiss);
-    var grid = document.querySelector('.planes-grid');
-    if (grid) grid.addEventListener('scroll', dismiss, { passive: true, once: true });
-  })();
+  // ── Snap dots para ev-cards en mobile ──
+  function initSnapDots(cardsId, dotsId) {
+    var cards = document.getElementById(cardsId);
+    var dotsWrap = document.getElementById(dotsId);
+    if (!cards || !dotsWrap) return;
+    var dots = dotsWrap.querySelectorAll('.ev-snap-dot');
+    cards.addEventListener('scroll', function() {
+      var cardWidth = cards.querySelector('.ev-card').offsetWidth + 12;
+      var idx = Math.round(cards.scrollLeft / cardWidth);
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+    }, { passive: true });
+    dots.forEach(function(d, i) {
+      d.addEventListener('click', function() {
+        var cardWidth = cards.querySelector('.ev-card').offsetWidth + 12;
+        cards.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+      });
+    });
+  }
+  initSnapDots('ev-cards-bodas', 'dots-bodas');
 </script>
 
 </body>
 </html>
-
 
 
 
