@@ -170,7 +170,8 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background-image: url('https://res.cloudinary.com/dgo3agrzb/image/upload/v1777834299/pag_1_gn9plt.jpg');
+      /* FOTO-01: hero-fondo-principal */
+      background-image: url('https://ik.imagekit.io/vkah3x39a/baja%20Boda/1.jpg');
       background-size: cover;
       background-position: center top;
       animation: heroZoom 9s ease-out forwards;
@@ -1039,6 +1040,100 @@
 
 
     /* ══════════════════════════════════════
+       ADICIONALES
+    ══════════════════════════════════════ */
+    #adicionales {
+      background: var(--black);
+      padding: 100px 24px;
+      color: var(--cream);
+    }
+    .adicionales-inner { max-width: var(--max-w); margin: 0 auto; }
+    .adicionales-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .adicionales-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .adicionales-header .sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .adicionales-header .desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+    }
+    .adic-group { margin-bottom: 56px; }
+    .adic-group-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .adic-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .adic-item:last-child { border-bottom: none; }
+    .adic-item-left {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      flex: 1;
+    }
+    .adic-diamond {
+      width: 8px; height: 8px; min-width: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      margin-top: 6px;
+    }
+    .adic-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+    .adic-desc {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+      max-width: 600px;
+    }
+    .adic-price {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold-lt);
+      white-space: nowrap;
+      text-align: right;
+      padding-top: 2px;
+    }
+    @media (max-width: 600px) {
+      .adic-item { flex-direction: column; gap: 8px; }
+      .adic-price { text-align: left; padding-left: 26px; }
+      #adicionales { padding: 64px 16px; }
+      .adicionales-header { margin-bottom: 48px; }
+    }
+
+    /* ══════════════════════════════════════
        TESTIMONIOS — dark with images
     ══════════════════════════════════════ */
     #testimonios {
@@ -1099,7 +1194,8 @@
     #adelanto {
       position: relative;
       padding: 120px 24px;
-      background-image: url('https://res.cloudinary.com/dgo3agrzb/image/upload/v1777600530/Boda_11_ddlvui.jpg');
+      /* FOTO-17: adelanto-fondo-seccion */
+      background-image: url('https://ik.imagekit.io/vkah3x39a/baja%20Boda/17.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -1255,7 +1351,8 @@
     #cta-final {
       position: relative;
       padding: 140px 24px;
-      background-image: url('https://res.cloudinary.com/dgo3agrzb/image/upload/v1756768489/boda-_Nancy_y_sebas_-_Pixels_Fotografia_y_Video-259_qcfaqu.jpg');
+      /* FOTO-18: cta-final-fondo-seccion */
+      background-image: url('https://ik.imagekit.io/vkah3x39a/baja%20Boda/18.jpg');
       background-size: cover;
       background-position: center top;
       background-attachment: fixed;
@@ -1625,37 +1722,43 @@
   <!-- Grilla editorial estilo cannn -->
   <div class="port-grid">
     <div class="port-cell">
-      <img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777600496/Pixels_Fotograf%C3%ADa_y_Video-180_vfamqy.jpg" alt="Boda" loading="lazy" />
+      <!-- FOTO-02: portfolio-grilla-izquierda -->
+      <img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/2.jpg" alt="Boda" loading="lazy" />
     </div>
     <div class="port-cell">
-      <img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1756770251/Pixels_Fotografia_y_Video-78_u8mhrn.jpg" alt="Boda" loading="lazy" />
+      <!-- FOTO-03: portfolio-grilla-centro -->
+      <img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/3.jpg" alt="Boda" loading="lazy" />
     </div>
     <div class="port-label-cell">
       <div class="num">+120</div>
       <div class="txt">Bodas fotografiadas</div>
     </div>
     <div class="port-cell">
-      <img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1756333181/DSC_1060_vfp28n.jpg" alt="Boda" loading="lazy" />
+      <!-- FOTO-04: portfolio-grilla-derecha-arriba -->
+      <img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/4.jpg" alt="Boda" loading="lazy" />
     </div>
     <div class="port-cell">
-      <img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1756332995/pixels_Fotografia_y_Video-2_lfan0v.jpg" alt="Boda" loading="lazy" />
+      <!-- FOTO-05: portfolio-grilla-derecha-abajo -->
+      <img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/5.jpg" alt="Boda" loading="lazy" />
     </div>
     <div class="port-cell">
-      <img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1769654994/Pixels_Fotograf%C3%ADa_y_Video-7_zuyliu.jpg" alt="Boda" loading="lazy" />
+      <!-- FOTO-06: portfolio-grilla-vertical -->
+      <img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/6.jpg" alt="Boda" loading="lazy" />
     </div>
     <div class="port-cell wide">
-      <img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777600544/Boda_7_psxy3i.jpg" alt="Boda" loading="lazy" style="object-position: center 30%;" />
+      <!-- FOTO-07: portfolio-panoramica-wide -->
+      <img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/7.jpg" alt="Boda" loading="lazy" style="object-position: center 30%;" />
     </div>
   </div>
 
   <!-- Detalles -->
   <div class="detail-grid">
-    <div class="detail-cell"><img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777834298/pag_12_Ramo_k0c0yv.jpg" alt="Ramo" loading="lazy" /><span class="dlabel">Ramo</span></div>
-    <div class="detail-cell"><img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777834320/pag_12_espontaneo_nlvfkx.jpg" alt="Espontáneo" loading="lazy" /><span class="dlabel">Espontáneo</span></div>
-    <div class="detail-cell"><img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777835801/editada_finfsu.jpg" alt="Detalles" loading="lazy" /><span class="dlabel">Detalles</span></div>
-    <div class="detail-cell"><img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777835313/pag_12_ambientacion_vyyagd.jpg" alt="Ambientación" loading="lazy" /><span class="dlabel">Ambientación</span></div>
-    <div class="detail-cell"><img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777834301/pag_12_alianzas_ogcgq0.jpg" alt="Alianzas" loading="lazy" /><span class="dlabel">Alianzas</span></div>
-    <div class="detail-cell"><img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777834308/pag_12_ropa_stzzsz.jpg" alt="Ropa" loading="lazy" /><span class="dlabel">Ropa</span></div>
+    <div class="detail-cell"><!-- FOTO-08: detalle-ramo --><img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/8.jpg" alt="Ramo" loading="lazy" /><span class="dlabel">Ramo</span></div>
+    <div class="detail-cell"><!-- FOTO-09: detalle-espontaneo --><img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/9.jpg" alt="Espontáneo" loading="lazy" /><span class="dlabel">Espontáneo</span></div>
+    <div class="detail-cell"><!-- FOTO-10: detalle-detalles --><img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/10.jpg" alt="Detalles" loading="lazy" /><span class="dlabel">Detalles</span></div>
+    <div class="detail-cell"><!-- FOTO-11: detalle-ambientacion --><img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/11.jpg" alt="Ambientación" loading="lazy" /><span class="dlabel">Ambientación</span></div>
+    <div class="detail-cell"><!-- FOTO-12: detalle-alianzas --><img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/12.jpg" alt="Alianzas" loading="lazy" /><span class="dlabel">Alianzas</span></div>
+    <div class="detail-cell"><!-- FOTO-13: detalle-ropa --><img src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/13.jpg" alt="Ropa" loading="lazy" /><span class="dlabel">Ropa</span></div>
   </div>
 
   <div class="portfolio-cta reveal">
@@ -1672,7 +1775,8 @@
   <div class="wrap">
     <div class="about-inner">
       <div class="about-photo-wrap reveal-left">
-        <img class="about-photo" src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777834298/pag_15_gy7rmq.jpg" alt="Marcos Reyes, fotógrafo de bodas" />
+        <!-- FOTO-14: about-foto-marcos -->
+        <img class="about-photo" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/14.jpg" alt="Marcos Reyes, fotógrafo de bodas" />
         <div class="about-badge">
           <span class="bnum">+120</span>
           <span class="blabel">Bodas</span>
@@ -1923,6 +2027,104 @@
   </div>
 </section>
 
+<!-- ══════ ADICIONALES ══════ -->
+<section id="adicionales">
+  <div class="adicionales-inner">
+    <div class="adicionales-header reveal">
+      <p class="sub">productos y servicios opcionales</p>
+      <h2>Adicionales</h2>
+      <p class="desc">Productos y servicios adicionales que podés agregar a tu paquete elegido.</p>
+    </div>
+
+    <!-- PRODUCTOS IMPRESOS -->
+    <div class="adic-group reveal">
+      <p class="adic-group-label">Productos Impresos</p>
+
+      <div class="adic-item">
+        <div class="adic-item-left">
+          <div class="adic-diamond"></div>
+          <div>
+            <div class="adic-name">Álbum Fotolibro Impreso — Pequeño</div>
+            <div class="adic-desc">Con 25 fotos (8 páginas), tamaño 20×40 cm.</div>
+          </div>
+        </div>
+        <div class="adic-price">$85.000</div>
+      </div>
+
+      <div class="adic-item">
+        <div class="adic-item-left">
+          <div class="adic-diamond"></div>
+          <div>
+            <div class="adic-name">Álbum Fotolibro Impreso — Grande</div>
+            <div class="adic-desc">Con 80 fotos (15 páginas), tamaño 30×45 cm.</div>
+          </div>
+        </div>
+        <div class="adic-price">$150.000</div>
+      </div>
+
+      <div class="adic-item">
+        <div class="adic-item-left">
+          <div class="adic-diamond"></div>
+          <div>
+            <div class="adic-name">Porta Retratos para cada Mesa</div>
+            <div class="adic-desc">Consultar tamaños disponibles. Precio por unidad.</div>
+          </div>
+        </div>
+        <div class="adic-price">desde $9.500 c/u</div>
+      </div>
+
+      <div class="adic-item">
+        <div class="adic-item-left">
+          <div class="adic-diamond"></div>
+          <div>
+            <div class="adic-name">Cuadro Polaroid</div>
+            <div class="adic-desc">Impresión artística en formato Polaroid para decoración o regalo.</div>
+          </div>
+        </div>
+        <div class="adic-price">desde $65.000</div>
+      </div>
+    </div>
+
+    <!-- SERVICIOS -->
+    <div class="adic-group reveal">
+      <p class="adic-group-label">Servicios</p>
+
+      <div class="adic-item">
+        <div class="adic-item-left">
+          <div class="adic-diamond"></div>
+          <div>
+            <div class="adic-name">Servicio QR en Tiempo Real — Fotos para Invitados</div>
+            <div class="adic-desc">Asegurá que tus invitados también tengan fotos increíbles. Mientras nos enfocamos en los momentos principales, un fotógrafo profesional adicional se dedicará 100% a tus invitados.<br><br>Compartimos las fotos a través de un código QR · Galería en línea · Cobertura de 2 horas · Cantidad ilimitada de fotos.</div>
+          </div>
+        </div>
+        <div class="adic-price">desde $195.000</div>
+      </div>
+
+      <div class="adic-item">
+        <div class="adic-item-left">
+          <div class="adic-diamond"></div>
+          <div>
+            <div class="adic-name">Fotógrafo Extra</div>
+            <div class="adic-desc">Mientras un fotógrafo captura los momentos principales, un segundo fotógrafo permite documentar más ángulos, reacciones y momentos simultáneos que de otra forma podrían pasar desapercibidos. Ideal para bodas con muchos invitados, preparativos en ubicaciones distintas o parejas que desean una cobertura más completa de su día.</div>
+          </div>
+        </div>
+        <div class="adic-price">desde $450.000</div>
+      </div>
+
+      <div class="adic-item">
+        <div class="adic-item-left">
+          <div class="adic-diamond"></div>
+          <div>
+            <div class="adic-name">Pre-Boda</div>
+            <div class="adic-desc">No es solo para sacar fotos bonitas. Es una oportunidad para conocernos mejor, que se sientan cómodos frente a la cámara y que puedan disfrutar un momento juntos antes del gran día. Incluye 2 cambios de outfit en un período de 3 hs.</div>
+          </div>
+        </div>
+        <div class="adic-price">desde $350.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════ TESTIMONIOS ══════ -->
 <section id="testimonios">
   <div class="testi-inner">
@@ -1932,7 +2134,8 @@
     </div>
     <div class="testi-grid">
       <div class="testi-card reveal">
-        <img class="testi-img" src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777834318/pag_10_-a_ymqqm1.jpg" alt="Clara y Clem" loading="lazy" />
+        <!-- FOTO-15: testimonio-clara-clem -->
+        <img class="testi-img" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/15.jpg" alt="Clara y Clem" loading="lazy" />
         <div>
           <div class="testi-tag">"Muy atentos."</div>
           <p class="testi-body">Marcos capturó cada momento con una sensibilidad increíble. Las fotos nos hicieron llorar de emoción cuando las vimos. Superó todas nuestras expectativas.</p>
@@ -1940,7 +2143,8 @@
         </div>
       </div>
       <div class="testi-card reveal">
-        <img class="testi-img" src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777834306/pag_10-b_vyyrqa.jpg" alt="Carolina y Gustavo" loading="lazy" />
+        <!-- FOTO-16: testimonio-carolina-gustavo -->
+        <img class="testi-img" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/16.jpg" alt="Carolina y Gustavo" loading="lazy" />
         <div>
           <div class="testi-tag">"Siempre puntual<br>en todo."</div>
           <p class="testi-body">Desde la reunión previa hasta la entrega final, todo fue perfecto. Marcos sabe exactamente cómo capturar lo espontáneo sin que te des cuenta. 100% recomendado.</p>
@@ -2294,8 +2498,6 @@
 
 </body>
 </html>
-
-
 
 
 
