@@ -128,7 +128,7 @@
       padding: 14px 32px;
       backdrop-filter: blur(10px);
     }
-    .nav-logo img { height: 38px; filter: brightness(10); }
+    .nav-logo img { height: 38px; width: auto; display: block; filter: brightness(10); }
     .nav-links {
       display: none;
       list-style: none;
@@ -1397,7 +1397,7 @@
       text-align: center;
     }
     .footer-logo { margin-bottom: 28px; }
-    .footer-logo img { height: 36px; filter: brightness(10) opacity(0.4); margin: 0 auto; }
+    .footer-logo img { height: 36px; width: auto; display: block; filter: brightness(10) opacity(0.4); margin: 0 auto; }
     .footer-links {
       list-style: none;
       display: flex;
@@ -1593,6 +1593,7 @@
     ══════════════════════════════════════ */
     /* Mobile first: todo el layout usa max-width + flex/grid, adaptable */
     @media (max-width: 479px) {
+      .nav-logo img { height: 28px; }
       .hero-title { font-size: clamp(2.6rem, 12vw, 4rem); letter-spacing: -1px; }
       .hero-content { padding: 0 20px 52px; }
       .btn-wa { padding: 14px 22px; font-size: 0.72rem; }
@@ -1618,6 +1619,206 @@
       .port-label-cell { aspect-ratio: 1/1; padding: 16px 14px; }
       .detail-grid { grid-template-columns: repeat(3, 1fr); }
     }
+
+    /* ══════════════════════════════════════
+       RESEÑAS REALES — carrusel de capturas (Google / Facebook / WhatsApp)
+    ══════════════════════════════════════ */
+    #resenas {
+      --rv-h: 320px;
+      background: var(--black);
+      color: #fff;
+      padding: 100px 0;
+      overflow: hidden;
+    }
+    .rv-header {
+      max-width: var(--max-w);
+      margin: 0 auto 28px;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .rv-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: #fff;
+    }
+    .rv-header h2 em { font-style: italic; color: var(--gold); }
+    .rv-sub {
+      margin-top: 12px;
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+    .rv-caption {
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      margin: 0 auto 36px;
+      padding: 0 24px;
+    }
+    .rv-wrap { position: relative; width: 100%; }
+    .rv-marquee {
+      overflow-x: auto;
+      overflow-y: hidden;
+      width: 100%;
+      cursor: grab;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+              mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    }
+    .rv-marquee::-webkit-scrollbar { display: none; }
+    .rv-marquee.dragging { cursor: grabbing; user-select: none; }
+    .rv-track {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      width: max-content;
+      padding: 6px 0 22px;
+    }
+    .rv-shot {
+      height: var(--rv-h);
+      width: auto;
+      max-width: none;
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: block;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.5);
+      cursor: zoom-in;
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+    .rv-video {
+      position: relative;
+      width: calc(var(--rv-h) * 0.5625);   /* 9:16 */
+      overflow: hidden;
+      background: #000;
+    }
+    .rv-video video {
+      width: 100%; height: 100%;
+      display: block;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .rv-play {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+    .rv-play::after {
+      content: "\25B6";
+      display: flex; align-items: center; justify-content: center;
+      width: 46px; height: 46px;
+      padding-left: 3px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.6);
+      color: #fff;
+      font-size: 1rem;
+    }
+    .rv-nav {
+      position: absolute;
+      top: calc(50% - 8px);
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 1.5rem;
+      line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .rv-nav:hover { background: rgba(0,0,0,0.85); border-color: rgba(255,255,255,0.5); }
+    .rv-prev { left: 8px; }
+    .rv-next { right: 8px; }
+    .rv-cta { text-align: center; margin-top: 40px; padding: 0 24px; }
+    .rv-cta .btn-wa {
+      max-width: 100%;
+      justify-content: center;
+      text-align: center;
+      white-space: normal;
+      line-height: 1.4;
+    }
+
+    /* Visor ampliado (fotos y videos con flechas) */
+    .rv-lb {
+      position: fixed; inset: 0;
+      z-index: 10001;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      background: rgba(0,0,0,0);
+      opacity: 0;
+      pointer-events: none;
+      transition: background 0.35s ease, opacity 0.35s ease;
+    }
+    .rv-lb.open { background: rgba(0,0,0,0.93); opacity: 1; pointer-events: all; }
+    .rv-lb-media {
+      max-width: min(92vw, 560px);
+      max-height: 86vh;
+      max-height: 86dvh;
+      width: auto; height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 4px;
+      background: #000;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      transform: scale(0.94);
+      transition: transform 0.35s ease;
+    }
+    .rv-lb.open .rv-lb-media { transform: scale(1); }
+    .rv-lb-close {
+      position: absolute; top: 14px; right: 18px;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.9rem; line-height: 1; font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      background: none; border: 0; cursor: pointer;
+      z-index: 2;
+    }
+    .rv-lb-close:hover { color: #fff; }
+    .rv-lb-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 2;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.08);
+      color: #fff; font-size: 1.6rem; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .rv-lb-nav:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.6); }
+    .rv-lb-prev { left: 1.5rem; }
+    .rv-lb-next { right: 1.5rem; }
+
+    /* Responsive */
+    @media (max-width: 1024px) { #resenas { --rv-h: 280px; } }
+    @media (max-width: 767px) {
+      #resenas { --rv-h: 240px; padding: 72px 0; }
+      .rv-track { gap: 10px; }
+      .rv-nav { width: 36px; height: 36px; font-size: 1.25rem; }
+      .rv-prev { left: 4px; }
+      .rv-next { right: 4px; }
+      .rv-play::after { width: 40px; height: 40px; }
+      .rv-lb { padding: 1rem; }
+      .rv-lb-nav { width: 38px; height: 38px; font-size: 1.4rem; }
+      .rv-lb-prev { left: 8px; }
+      .rv-lb-next { right: 8px; }
+    }
+    @media (max-width: 479px) {
+      #resenas { --rv-h: 210px; }
+      .rv-header { margin-bottom: 20px; }
+      .rv-caption { margin-bottom: 26px; font-size: 0.7rem; }
+      .rv-cta .btn-wa { padding: 14px 18px; font-size: 0.68rem; letter-spacing: 0.12em; }
+    }
   </style>
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
@@ -1633,7 +1834,7 @@
 <!-- ══════ NAV ══════ -->
 <nav id="main-nav">
   <a href="#hero" class="nav-logo">
-    <img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777600480/letras_vljkqr.png" alt="Pixels Fotografía y Video" />
+    <img src="https://ik.imagekit.io/vkah3x39a/favicon_io/letras.png?updatedAt=1780797543764" alt="Pixels Fotografía y Video" />
   </a>
   <ul class="nav-links">
     <li><a href="#portfolio">Portafolio</a></li>
@@ -2155,6 +2356,78 @@
   </div>
 </section>
 
+<!-- ══════ RESEÑAS REALES (capturas Google / Facebook / WhatsApp) ══════ -->
+<section id="resenas">
+  <div class="rv-header reveal">
+    <p class="section-eyebrow">Reseñas reales</p>
+    <h2>+120 parejas ya guardaron<br><em>sus recuerdos</em></h2>
+    <p class="rv-sub">Mensajes reales, sin filtro ni edición.</p>
+  </div>
+
+  <p class="rv-caption">Capturas reales de WhatsApp, Facebook y Google, tal como llegaron de nuestros clientes.</p>
+
+  <div class="rv-wrap">
+    <button class="rv-nav rv-prev" id="rvPrev" aria-label="Ver anteriores">&#8249;</button>
+    <div class="rv-marquee" id="rvMarquee">
+      <div class="rv-track" id="rvTrack">
+        <div class="rv-shot rv-video" data-video="https://res.cloudinary.com/w62x5jaa/video/upload/v1790117969/Screen_Recording_20260920_204017_WhatsApp.mp4" role="button" tabindex="0" aria-label="Reproducir reseña en video">
+          <video playsinline preload="metadata" muted><source src="https://res.cloudinary.com/w62x5jaa/video/upload/v1790117969/Screen_Recording_20260920_204017_WhatsApp.mp4#t=0.1" type="video/mp4"></video>
+          <span class="rv-play"></span>
+        </div>
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/1.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/2.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/3.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/4.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/5.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/6.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/7.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/8.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <div class="rv-shot rv-video" data-video="https://res.cloudinary.com/w62x5jaa/video/upload/v1790117968/Screen_Recording_20260920_210931_WhatsApp.mp4" role="button" tabindex="0" aria-label="Reproducir reseña en video">
+          <video playsinline preload="metadata" muted><source src="https://res.cloudinary.com/w62x5jaa/video/upload/v1790117968/Screen_Recording_20260920_210931_WhatsApp.mp4#t=0.1" type="video/mp4"></video>
+          <span class="rv-play"></span>
+        </div>
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/9.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/10.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/11.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/12.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/13.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/14.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/15.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/16.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <div class="rv-shot rv-video" data-video="https://res.cloudinary.com/w62x5jaa/video/upload/v1790117968/Screen_Recording_20260920_203735_WhatsApp.mp4" role="button" tabindex="0" aria-label="Reproducir reseña en video">
+          <video playsinline preload="metadata" muted><source src="https://res.cloudinary.com/w62x5jaa/video/upload/v1790117968/Screen_Recording_20260920_203735_WhatsApp.mp4#t=0.1" type="video/mp4"></video>
+          <span class="rv-play"></span>
+        </div>
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/17.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/18.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/19.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/20.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/21.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/22.png" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/23.jpg" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+        <img class="rv-shot" src="https://ik.imagekit.io/vkah3x39a/baja%20Boda/Capturas/24.jpg" alt="Reseña real de un cliente de Pixels Fotografía y Video" decoding="async">
+      </div>
+    </div>
+    <button class="rv-nav rv-next" id="rvNext" aria-label="Ver siguientes">&#8250;</button>
+  </div>
+
+  <div class="rv-cta">
+    <a class="btn-wa" href="https://api.whatsapp.com/send?phone=+543512518671&text=%C2%A1Hola!%20Quiero%20contratar%20y%20reservar%20mi%20fecha%2C%20%C2%BFsigue%20disponible%3F" target="_blank" rel="noopener">
+      <svg class="wa-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      QUIERO QUE MI HISTORIA SEA LA PRÓXIMA
+    </a>
+  </div>
+</section>
+
+<!-- Visor de reseñas -->
+<div class="rv-lb" id="rvLb" role="dialog" aria-modal="true" aria-label="Reseña ampliada">
+  <button class="rv-lb-close" id="rvLbClose" aria-label="Cerrar">&times;</button>
+  <button class="rv-lb-nav rv-lb-prev" id="rvLbPrev" aria-label="Anterior">&#8249;</button>
+  <button class="rv-lb-nav rv-lb-next" id="rvLbNext" aria-label="Siguiente">&#8250;</button>
+  <img class="rv-lb-media" id="rvLbImg" src="" alt="" style="display:none;">
+  <video class="rv-lb-media" id="rvLbVideo" playsinline controls style="display:none;"></video>
+</div>
+
 <!-- ══════ ADELANTO ══════ -->
 <section id="adelanto">
   <div class="adelanto-inner reveal">
@@ -2268,7 +2541,7 @@
 <!-- ══════ FOOTER ══════ -->
 <footer>
   <div class="footer-logo">
-    <img src="https://res.cloudinary.com/dgo3agrzb/image/upload/v1777600480/letras_vljkqr.png" alt="Pixels Fotografía y Video" />
+    <img src="https://ik.imagekit.io/vkah3x39a/favicon_io/letras.png?updatedAt=1780797543764" alt="Pixels Fotografía y Video" />
   </div>
   <ul class="footer-links">
     <li><a href="#portfolio">Portafolio</a></li>
@@ -2496,8 +2769,202 @@
   initSnapDots('ev-cards-bodas', 'dots-bodas');
 </script>
 
+<script>
+  /* ── RESEÑAS: carrusel infinito + visor ── */
+  (function () {
+    var marquee = document.getElementById('rvMarquee');
+    var track   = document.getElementById('rvTrack');
+    if (!marquee || !track) return;
+
+    /* items originales (antes de duplicar para el loop) */
+    var items = Array.prototype.map.call(track.children, function (node) {
+      if (node.classList.contains('rv-video')) return { type: 'video', src: node.getAttribute('data-video') };
+      return { type: 'image', src: node.src, alt: node.alt };
+    });
+    var total = items.length;
+
+    /* duplicamos una vez para el loop sin corte */
+    Array.prototype.slice.call(track.children).forEach(function (n) {
+      var c = n.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      c.tabIndex = -1;
+      track.appendChild(c);
+    });
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var SPEED = reduceMotion ? 0 : 0.045;   /* px por ms */
+    var loopWidth = 0, pos = 0, paused = false, resumeTimer = null;
+    var inView = false, running = false, lastTs = null;
+
+    /* ancho exacto de un ciclo (incluye el gap) */
+    function measure() {
+      var kids = track.children;
+      if (kids.length > total) loopWidth = kids[total].offsetLeft - kids[0].offsetLeft;
+    }
+    measure();
+    window.addEventListener('load', measure);
+    window.addEventListener('resize', measure);
+    Array.prototype.forEach.call(track.querySelectorAll('img'), function (img) {
+      if (!img.complete) img.addEventListener('load', measure);
+    });
+
+    function step(ts) {
+      if (!inView) { running = false; lastTs = null; return; }
+      if (lastTs === null) lastTs = ts;
+      var d = Math.min(ts - lastTs, 64);
+      lastTs = ts;
+      if (!paused && loopWidth > 0 && SPEED) {
+        pos += SPEED * d;
+        if (pos >= loopWidth) pos -= loopWidth;
+        marquee.scrollLeft = pos;
+      } else {
+        pos = marquee.scrollLeft;
+      }
+      requestAnimationFrame(step);
+    }
+    function start() { if (!running) { running = true; requestAnimationFrame(step); } }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        inView = es[0].isIntersecting;
+        if (inView) start();
+      }, { rootMargin: '120px' }).observe(marquee);
+    } else { inView = true; start(); }
+
+    function pause() { paused = true; clearTimeout(resumeTimer); }
+    function resume(delay) {
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(function () { pos = marquee.scrollLeft; paused = false; }, delay);
+    }
+
+    /* wrap cuando se scrollea a mano (touch / rueda / botones) */
+    marquee.addEventListener('scroll', function () {
+      if (!loopWidth) return;
+      if (marquee.scrollLeft >= loopWidth) marquee.scrollLeft -= loopWidth;
+      else if (paused && marquee.scrollLeft <= 0) marquee.scrollLeft = loopWidth;
+    }, { passive: true });
+
+    /* mouse: pausa al pasar + arrastre (touch usa el scroll nativo) */
+    marquee.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') pause(); });
+    marquee.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse' && !down) resume(300); });
+
+    var down = false, moved = false, startX = 0, startScroll = 0;
+    marquee.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; moved = false; startX = e.clientX; startScroll = marquee.scrollLeft; pause();
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - startX;
+      if (!moved && Math.abs(dx) > 5) { moved = true; marquee.classList.add('dragging'); }
+      if (moved) {
+        var next = startScroll - dx;
+        if (loopWidth) next = ((next % loopWidth) + loopWidth) % loopWidth;
+        marquee.scrollLeft = next;
+      }
+    });
+    function endDrag() {
+      if (!down) return;
+      down = false;
+      marquee.classList.remove('dragging');
+      resume(1500);
+    }
+    window.addEventListener('pointerup', endDrag);
+    window.addEventListener('pointercancel', endDrag);
+
+    marquee.addEventListener('touchstart', pause, { passive: true });
+    marquee.addEventListener('touchend', function () { resume(2000); }, { passive: true });
+    marquee.addEventListener('wheel', function () { pause(); resume(1500); }, { passive: true });
+
+    /* botones */
+    function navBy(dir) {
+      pause();
+      var stepPx = Math.max(240, marquee.clientWidth * 0.7);
+      if (loopWidth && marquee.scrollLeft < stepPx) marquee.scrollLeft += loopWidth;
+      marquee.scrollBy({ left: dir * stepPx, behavior: 'smooth' });
+      resume(2500);
+    }
+    document.getElementById('rvPrev').addEventListener('click', function () { navBy(-1); });
+    document.getElementById('rvNext').addEventListener('click', function () { navBy(1); });
+
+    /* ── Visor ── */
+    var lb = document.getElementById('rvLb'),
+        lbImg = document.getElementById('rvLbImg'),
+        lbVideo = document.getElementById('rvLbVideo'),
+        current = 0;
+
+    function show(index) {
+      current = ((index % total) + total) % total;
+      var it = items[current];
+      lbVideo.pause();
+      if (it.type === 'video') {
+        lbImg.style.display = 'none';
+        lbVideo.style.display = 'block';
+        lbVideo.src = it.src;
+        lbVideo.play().catch(function () {});
+      } else {
+        lbVideo.style.display = 'none';
+        lbVideo.removeAttribute('src');
+        lbImg.style.display = 'block';
+        lbImg.src = it.src;
+        lbImg.alt = it.alt || '';
+      }
+    }
+    function openLb(i) {
+      pause();
+      show(i);
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      lbVideo.pause();
+      lbVideo.removeAttribute('src');
+      resume(600);
+    }
+
+    track.addEventListener('click', function (e) {
+      if (moved) { moved = false; return; }         /* fue un arrastre, no un click */
+      var el = e.target.closest('.rv-shot');
+      if (!el) return;
+      var idx = Array.prototype.indexOf.call(track.children, el);
+      if (idx > -1) openLb(idx % total);
+    });
+    track.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var el = e.target.closest('.rv-video');
+      if (!el) return;
+      e.preventDefault();
+      openLb(Array.prototype.indexOf.call(track.children, el) % total);
+    });
+
+    document.getElementById('rvLbClose').addEventListener('click', closeLb);
+    document.getElementById('rvLbPrev').addEventListener('click', function (e) { e.stopPropagation(); show(current - 1); });
+    document.getElementById('rvLbNext').addEventListener('click', function (e) { e.stopPropagation(); show(current + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+
+    /* swipe en el visor (mobile) */
+    var sx = null;
+    lb.addEventListener('touchstart', function (e) { sx = e.changedTouches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      if (sx === null) return;
+      var dx = e.changedTouches[0].clientX - sx;
+      sx = null;
+      if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  })();
+</script>
 </body>
 </html>
+
+
 
 
 
